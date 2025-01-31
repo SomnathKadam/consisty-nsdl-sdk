@@ -9,7 +9,7 @@ buildscript {
   }
 
   dependencies {
-    classpath "com.android.tools.build:gradle:8.7.2"
+    classpath "com.android.tools.build:gradle:8.7.3"
     // noinspection DifferentKotlinGradleVersion
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion')}"
   }
@@ -41,6 +41,13 @@ def supportsNamespace() {
 }
 
 android {
+  packagingOptions {
+    pickFirst 'lib/x86/libc++_shared.so'
+    pickFirst 'lib/x86_64/libc++_shared.so'
+    pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+    pickFirst 'lib/arm64-v8a/libc++_shared.so'
+  }
+
   if (supportsNamespace()) {
     namespace "com.consistynsdlsdk"
 
@@ -76,14 +83,54 @@ android {
 }
 
 repositories {
-  mavenCentral()
   google()
+
+  mavenCentral()
+
+  maven { url "https://jitpack.io" }
+
+  maven {
+    credentials {
+      username = "perfios_android"
+      password = "ATBBVJt46AQLUNupA9U7cRSTk3eU6C014B02"
+    }
+    authentication{
+      basic(BasicAuthentication)
+    }
+    url "https://api.bitbucket.org/2.0/repositories/perfios-android/SDK/src/releases/"
+  }
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
 
 dependencies {
-  implementation "com.facebook.react:react-android"
+  implementation "com.facebook.react:react-android:0.76.0"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  // Additional dependencies
+  implementation("com.airbnb.android:lottie:4.1.0")
+  implementation("com.intuit.sdp:sdp-android:1.0.6")
+  implementation("com.github.vivchar:ViewPagerIndicator:1.1.0")
+  implementation("com.github.smart-fun:XmlToJson:1.5.1")
+
+  // AndroidX Lifecycle components
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+  implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
+
+  // Networking libraries
+  implementation("com.squareup.okhttp3:okhttp:4.9.0")
+  implementation("com.squareup.retrofit2:converter-jackson:2.9.0")
+  implementation("com.android.volley:volley:1.2.1")
+
+  // Perfios liveness SDK
+  implementation("com.perfios.liveness:sdk:2.2.0")
+
+  // Root detection library
+  implementation("com.scottyab:rootbeer-lib:0.1.0")
+
+  implementation ("com.github.chintan369:Ipify-Android:1.0.1")
+
+  api project(":assisted_sdk")
+  api project(":protean_core_sdk")
 }
 

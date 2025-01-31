@@ -1,0 +1,3 @@
+include ':assisted_sdk'
+include ':protean_core_sdk'
+
