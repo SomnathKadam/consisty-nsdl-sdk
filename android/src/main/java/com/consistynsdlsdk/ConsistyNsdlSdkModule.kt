@@ -57,7 +57,7 @@ class ConsistyNsdlSdkModule(reactContext: ReactApplicationContext) :
           }
           promise.resolve(result)
         } else {
-          promise.reject("TRANSACTION_FAILED", "Account creation was cancelled or failed")
+          promise.reject("01", "Account creation was cancelled or failed")
         }
 
       }
