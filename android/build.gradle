@@ -92,7 +92,7 @@ repositories {
   maven {
     credentials {
       username = "perfios_android"
-      password = "ATBBVJt46AQLUNupA9U7cRSTk3eU6C014B02"
+      password = "ATBBGgeYE7SzQgtKgkaMFw7f6dwc674F271A"
     }
     authentication{
       basic(BasicAuthentication)
