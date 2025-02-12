@@ -1,6 +1,6 @@
 {
   "name": "consisty-nsdl-sdk",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "SDK of NSDL account-opening for react-native in android",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
