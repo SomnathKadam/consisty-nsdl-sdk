@@ -23,6 +23,7 @@ def isNewArchitectureEnabled() {
 
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
+apply plugin: "kotlin-kapt"
 
 if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
