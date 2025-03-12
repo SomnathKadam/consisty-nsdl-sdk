@@ -94,6 +94,12 @@ android {
 }
 
 repositories {
+  def propertiesFile = new File(rootProject.projectDir,"local.properties")
+  def properties = new Properties()
+  properties.load(new FileInputStream(propertiesFile))
+  def SDKUrl = properties.getProperty("LIVENESS_SDK_URL") ?: "EMPTY"
+  def SDKToken = properties.getProperty("LIVENESS_SDK_TOKEN") ?: "EMPTY"
+
   google()
 
   mavenCentral()
@@ -101,14 +107,15 @@ repositories {
   maven { url "https://jitpack.io" }
 
   maven {
-    credentials {
-      username = "perfios_android"
-      password = "ATBBGgeYE7SzQgtKgkaMFw7f6dwc674F271A"
+    url = SDKUrl
+    authentication {
+      header(HttpHeaderAuthentication)
     }
-    authentication{
-      basic(BasicAuthentication)
+    credentials(HttpHeaderCredentials) {
+      name = "Authorization"
+      value = "Bearer " + SDKToken
     }
-    url "https://api.bitbucket.org/2.0/repositories/perfios-android/SDK/src/releases/"
+
   }
 }
 
@@ -134,7 +141,7 @@ dependencies {
   implementation("com.android.volley:volley:1.2.1")
 
   // Perfios liveness SDK
-  //implementation("com.perfios.liveness:sdk:2.3.0")
+  implementation("com.perfios.liveness:sdk:2.4.0")
 
   // Root detection library
   implementation("com.scottyab:rootbeer-lib:0.1.0")
@@ -148,6 +155,5 @@ dependencies {
 
   api project(":assisted_sdk")
   api project(":protean_core_sdk")
-  api project(":liveness_sdk")
 }
 

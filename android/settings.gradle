@@ -1,3 +1,2 @@
 include ':assisted_sdk'
 include ':protean_core_sdk'
-include ':liveness_sdk'
