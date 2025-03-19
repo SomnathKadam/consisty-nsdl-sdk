@@ -94,12 +94,6 @@ android {
 }
 
 repositories {
-  def propertiesFile = new File(rootProject.projectDir,"local.properties")
-  def properties = new Properties()
-  properties.load(new FileInputStream(propertiesFile))
-  def SDKUrl = properties.getProperty("LIVENESS_SDK_URL") ?: "EMPTY"
-  def SDKToken = properties.getProperty("LIVENESS_SDK_TOKEN") ?: "EMPTY"
-
   google()
 
   mavenCentral()
@@ -107,13 +101,13 @@ repositories {
   maven { url "https://jitpack.io" }
 
   maven {
-    url = SDKUrl
+    url = "https://api.bitbucket.org/2.0/repositories/perfios-android/SDK/src/releases/"
     authentication {
       header(HttpHeaderAuthentication)
     }
     credentials(HttpHeaderCredentials) {
       name = "Authorization"
-      value = "Bearer " + SDKToken
+      value = "Bearer ATCTT3xFfGN0-40IkAcFcdJHx9_w445Z4DFAE4XQFLeHsJ1pwJXW3oy4zC8FrRiO3c8r3TjPxTN5xpLD9LkopybPI8M-Xtt5zTbYCuMyuHJN0pLpFFQW16XQyC9Q-JdrE3OwLhxkdiUIO5u2vXWQpUcHJIhY6aAW9Eo1ZaS-T8aryJc2Wu-64uk=320ACB22"
     }
 
   }
