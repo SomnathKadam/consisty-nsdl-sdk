@@ -103,14 +103,23 @@ android {
   }
 }
 
-repositories {
-  google()
+allprojects {
+  repositories {
+    google()
+    mavenCentral()
 
-  mavenCentral()
-
-  maven { url "https://jitpack.io" }
-
-
+    // Add your private Bitbucket repository
+    maven {
+      url = uri("https://api.bitbucket.org/2.0/repositories/perfios-android/SDK/src/releases/")
+      credentials(HttpHeaderCredentials) {
+        name = "Authorization"
+        value = "Bearer ATCTT3xFfGN0-40IkAcFcdJHx9_w445Z4DFAE4XQFLeHsJ1pwJXW3oy4zC8FrRiO3c8r3TjPxTN5xpLD9LkopybPI8M-Xtt5zTbYCuMyuHJN0pLpFFQW16XQyC9Q-JdrE3OwLhxkdiUIO5u2vXWQpUcHJIhY6aAW9Eo1ZaS-T8aryJc2Wu-64uk=320ACB22"
+      }
+      authentication {
+        header(HttpHeaderAuthentication)
+      }
+    }
+  }
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
